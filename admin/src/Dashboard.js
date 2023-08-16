@@ -2,6 +2,7 @@ import React from 'react';
 import './dashboard.css';
 import './design.css';
 import { useLocation } from 'react-router-dom';
+import MyImage from './pages/logo.png';
 const Dashboard = () => {
   const location = useLocation();
 
@@ -36,9 +37,29 @@ const Dashboard = () => {
     {isDashboardPath && 
     
     
-    <h2 className='dash'>Content...</h2>
-    
-    
+    <div className='stats'>
+
+      <div className='card'>
+        <h2 className='user'>User</h2>
+        <p>00</p>
+      </div>
+
+      <div className='card'>
+        <h2 className='feedback'>Feedback</h2>
+        <p>00</p>
+      </div>
+
+      <div className='card'>
+        <h2 className='ride'>Ride</h2>
+        <p>00</p>
+      </div>
+
+      <div className='card'>
+        <h2 className='driver'>Driver</h2>
+        <p>00</p>
+      </div>
+      <img className='Logo' src={MyImage} />
+    </div>
     
     
     
