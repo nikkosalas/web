@@ -17,23 +17,21 @@ body {
 }
 
 .form-container {
-  border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  text-align: center;
   justify-content: center;
-  min-height: 50vh;
-  margin: 6rem 1rem;
-  padding-bottom: 5rem;
+  min-height: 100vh; 
+  margin: 0;
+  padding: 2rem; 
+  background-color: #fff0db;
 }
 
 .login-form {
   padding-top: 50px;
+  margin-top: -2rem;
 }
 
-.register-form {
-  padding-top: 50px;
-}
 
 h2 {
   padding-top: 1rem;
@@ -71,10 +69,29 @@ button {
 }
 
 .box {
-  border: 1px solid black;
+
   padding: 4rem;
-  background-color: rgba(5, 3, 3, 0.377);
+  background-color: rgba(5, 3, 3, 0.288);
   border-radius: 5px;
+}
+
+
+/* Define the transition */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }
 
 /* Media Query for Mobile Devices */
@@ -87,4 +104,13 @@ button {
   .box {
     padding: 2rem; /* Adjust the padding for smaller screens */
   }
+}
+
+
+.login-logo{
+
+  width: 15rem;
+  height: 13rem;
+  margin: 0 auto; /* Center the login-logo horizontally */
+  display: block;
 }

@@ -53,13 +53,30 @@
     color: black;
 }
 
+.fade-enter {
+    opacity: 0;
+    transform: translateY(10px); /* Optional: Slide in from the top */
+  }
+  
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+  }
+  
+  .fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .fade-exit-active {
+    opacity: 0;
+    transform: translateY(-10px); /* Optional: Slide out to the top */
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+  }
 
-
-
-
-
-
-
+  
+  
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .nav {

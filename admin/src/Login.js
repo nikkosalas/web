@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import MyImage from './pages/logo.png';
 export const Login = (props) => {
   const [username, setUser] = useState('');
   const [password, setPass] = useState('');
@@ -27,7 +27,7 @@ export const Login = (props) => {
   return (
     <div className="form-container">
       <div className="box">
-        <h2>Login</h2>
+      <img className='login-logo' src={MyImage} />
         <form className="login-form" onSubmit={handleSubmit}>
 
           <label htmlFor="username">Username</label>

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-
+import MyImage from './pages/logo.png';
 
 export const Register = (props) => {
 
@@ -15,7 +15,7 @@ export const Register = (props) => {
     return(
         <div className="form-container">
             <div className="box">
-                <h2>Register</h2>
+            <img className='login-logo' src={MyImage} />
         <form className="register-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Fullname</label>
             <input value={name} onChange={(e)=> setName(e.target.value)} type="name" id="name"  placeholder="Full Name" name="name" />
