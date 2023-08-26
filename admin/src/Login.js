@@ -7,7 +7,7 @@ export const Login = (props) => {
 
   const handleLogin = () => {
     if (username === 'admin' && password === '123') {
-      // Set loggedIn state to true on successful login
+    
       setLoggedIn(true);
     } else {
       alert('Invalid username or password. Please try again.');
@@ -19,7 +19,7 @@ export const Login = (props) => {
     handleLogin(); // Call the handleLogin function to check credentials
   };
 
-  // Redirect to the dashboard page if loggedIn is true
+  
   if (loggedIn) {
     window.location.href = '/dashboard';
   }

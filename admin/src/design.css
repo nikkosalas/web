@@ -1,54 +1,56 @@
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  h1 {
-    color: black;
-    text-align: center;
-    padding: 1rem;
-  }
-  
-  .stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; 
-    padding: 1%;
-  }
-  
-  .card {
-    padding: 20px;
-    width: 100%; 
-    max-width: 18rem;
-    border: 1px solid black;
-    margin: 1rem;
-    border-radius: 5px;
-    background-color: rgba(165, 161, 161, 0.411);
-    box-shadow: 0px 4px 6px rgb(8, 8, 8);
-  }
-  
-  .user,
-  .driver,
-  .feedback,
-  .ride {
-    color: black;
-    text-align: center;
-    font-size: 35px;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 500;
-  }
-  
-  p {
-    color: black;
-    text-align: center;
-    font-size: 20px;
-  }
-  
-  .Logo {
-    width: 100%; 
-    max-width: 33rem;
-    height: auto; 
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; 
+}
+
+h1 {
+  color: black;
+  text-align: center;
+  padding: 1rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1%;
+  flex-direction: column;
+}
+
+.card {
+  padding: 20px;
+  width: 100%;
+  max-width: 18rem;
+  border: 1px solid black;
+  margin: 1rem;
+  border-radius: 5px;
+  background-color: rgba(165, 161, 161, 0.411);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.15s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.user,
+.driver,
+.feedback,
+.ride {
+  color: black;
+  text-align: center;
+  font-size: 35px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+p {
+  color: black;
+  text-align: center;
+  font-size: 20px;
+}
