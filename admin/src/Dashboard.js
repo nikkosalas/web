@@ -2,7 +2,7 @@ import React from 'react';
 import './dashboard.css';
 import './design.css';
 import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
 const Dashboard = () => {
   const location = useLocation();
 
