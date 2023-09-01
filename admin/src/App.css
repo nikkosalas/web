@@ -67,21 +67,21 @@ button.btn-form {
   background-color: #8489eb;
   color: white;
   border: none;
-  padding: 15px 30px; /* Increase padding for a larger button */
+  padding: 15px 30px; 
   border-radius: 10px;
   cursor: pointer;
-  font-size: 16px; /* Increase font size */
+  font-size: 16px; 
   font-weight: 700;
   letter-spacing: 1px;
-  transition: background-color 0.3s; /* Smooth background color transition */
+  transition: background-color 0.3s; 
 }
 button.btn-form:hover {
-  background-color: #6a70d1; /* Darken the background color on hover */
+  background-color: #6a70d1; 
 }
 .link-button {
   background: none;
   text-decoration: underline;
-  color: #000000; /* Change the link color to match your design */
+  color: #000000; 
   letter-spacing: 0px;
   transition: color 0.3s; 
 }

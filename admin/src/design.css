@@ -105,7 +105,7 @@ button:hover{
 }
 
 @media (max-width: 768px) {
-  /* Center align table on smaller screens */
+  
   .table-container {
     height: auto;
   }
