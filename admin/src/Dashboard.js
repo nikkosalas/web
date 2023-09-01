@@ -15,10 +15,10 @@ const Dashboard = () => {
       <a href ='/dashboard' className='site-title'>Admin</a>
       <ul>
         <li>
-          <a href='/feedback'>Feedback</a>
+          <a href='/users'>Users</a>
           </li>
           <li>
-          <a href='/users'>Users</a>
+          <a href='/feedback'>Feedback</a>
           </li>
           <li>
           <a href='/rides'>Rides</a>

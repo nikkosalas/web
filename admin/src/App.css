@@ -63,21 +63,25 @@ input:focus {
   box-shadow: 0px 0px 10px rgba(117, 122, 224, 0.795);
 }
 
-button {
-  border: none;
+button.btn-form {
   background-color: #8489eb;
-  padding: 20px;
+  color: white;
+  border: none;
+  padding: 15px 30px; /* Increase padding for a larger button */
   border-radius: 10px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 16px; /* Increase font size */
   font-weight: 700;
   letter-spacing: 1px;
+  transition: background-color 0.3s; /* Smooth background color transition */
 }
-
+button.btn-form:hover {
+  background-color: #6a70d1; /* Darken the background color on hover */
+}
 .link-button {
   background: none;
   text-decoration: underline;
-  color: rgb(240, 240, 240);
+  color: #000000; /* Change the link color to match your design */
   letter-spacing: 0px;
   transition: color 0.3s; 
 }
