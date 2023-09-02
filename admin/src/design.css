@@ -60,68 +60,73 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 35vh;
+  height: 40vh;
 }
 
 /* Style for the table */
 table {
   border-collapse: collapse;
-  width: 100%; 
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 800px;
+  background-color: #fff; 
+  border-radius: 8px; 
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 /* Style for table headers (th) */
 th {
-  background-color: #6a70d1; 
-  color: #fff;
+  background-color: #333; 
+  color: #fff; 
   font-weight: bold;
   font-size: 14px;
-  padding: 12px;
+  padding: 12px; 
   text-align: center;
-  border: 1px solid #6a70d1; 
+  border: 1px solid #444; 
 }
 
 /* Style for table cells (td) */
 td {
-  border: 1px solid #ddd;
+  border: 1px solid #ddd; 
   text-align: left;
-  padding: 10px;
+  padding: 10px; 
 }
 
 /* Style for delete buttons */
-button{
-  background-color: #e53935;
-  color: #fff;
+button {
+  background-color: #e53935; 
+  color: #fff; 
   border: none;
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 4px; 
 }
 button:hover{
   color: black;
 }
 
-/* Media Query for Mobile Devices */
 @media (max-width: 768px) {
-  .table-container {
-    padding: 0; 
-    overflow-x: auto; 
-  }
   
+  .table-container {
+    height: auto;
+  }
+
+ 
   table {
+    width: 100%;
     font-size: 12px; 
   }
+
   
   th, td {
     text-align: center;
   }
+
   
   th, td {
     padding: 8px;
   }
 }
+
 
 
 
