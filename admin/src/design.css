@@ -75,23 +75,22 @@ table {
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
-
 /* Style for table headers (th) */
 th {
   background-color: #333;
   color: #fff;
   font-weight: bold;
   font-size: 14px;
-  padding: 8px; 
-  text-align: center;
+  padding: 8px;
+  text-align: center; 
   border: 1px solid #444;
 }
 
 /* Style for table cells (td) */
 td {
   border: 1px solid #ddd;
-  text-align: left;
-  padding: 8px; 
+  text-align: center; 
+  padding: 8px;
 }
 
 /* Style for delete buttons */
@@ -104,7 +103,6 @@ button {
   border-radius: 4px;
 }
 
-/* Hover effect for delete buttons */
 button:hover {
   color: black;
 }

@@ -27,21 +27,21 @@ export const Login = (props) => {
   return (
     <div className="form-container">
       <div className="box">
-      <img className='login-logo' src={MyImage} />
-        <form className="login-form" onSubmit={handleSubmit}>
+       <img className='login-logo' src={MyImage} />
+          <form className="login-form" onSubmit={handleSubmit}>
 
-          <label htmlFor="username">Username</label>
-          <input value={username} onChange={(e) => setUser(e.target.value)} type="text" placeholder="Username" id="username" name="username" />
-        
-          <label htmlFor="password">Password</label>
-          <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*******" id="password" name="password" />
-        
-          <button className="btn-form" type="submit">Login</button>
-        </form>
+            <label htmlFor="username">Username</label>
+            <input value={username} onChange={(e) => setUser(e.target.value)} type="text" placeholder="Username" id="username" name="username" />
+          
+            <label htmlFor="password">Password</label>
+            <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*******" id="password" name="password" />
+            <button className="btn-form" type="submit">Login</button>
 
-        <button
-          className="link-button"onClick={() => props.onFormSwitch('register')}> Don't have an account? Register Here!
-        </button>
+          </form>
+
+            <button
+              className="link-button"onClick={() => props.onFormSwitch('register')}> Don't have an account? Register Here!
+            </button>
       </div>
     </div>
   );
