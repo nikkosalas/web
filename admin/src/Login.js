@@ -1,25 +1,30 @@
 import React, { useState } from "react";
-import MyImage from './pages/logo.png';
-export const Login = (props) => {
-  const [username, setUser] = useState('');
-  const [password, setPass] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase"; // Import 'auth' from your 'firebase.js' file
 
-  const handleLogin = () => {
-    if (username === 'admin' && password === '123') {
-    
+import MyImage from './pages/logo.png';
+
+export const Login = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState(''); // Define 'username' state
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
       setLoggedIn(true);
-    } else {
-      alert('Invalid username or password. Please try again.');
+    } catch (error) {
+      console.error('Login error:', error.message);
+      alert('Invalid email or password. Please try again.');
     }
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission
-    handleLogin(); // Call the handleLogin function to check credentials
+    e.preventDefault();
+    handleLogin();
   };
 
-  
   if (loggedIn) {
     window.location.href = '/dashboard';
   }
@@ -27,21 +32,43 @@ export const Login = (props) => {
   return (
     <div className="form-container">
       <div className="box">
-       <img className='login-logo' src={MyImage} />
-          <form className="login-form" onSubmit={handleSubmit}>
-
-            <label htmlFor="username">Username</label>
-            <input value={username} onChange={(e) => setUser(e.target.value)} type="text" placeholder="Username" id="username" name="username" />
-          
-            <label htmlFor="password">Password</label>
-            <input value={password} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*******" id="password" name="password" />
-            <button className="btn-form" type="submit">Login</button>
-
-          </form>
-
-            <button
-              className="link-button"onClick={() => props.onFormSwitch('register')}> Don't have an account? Register Here!
-            </button>
+        <img className='login-logo' src={MyImage} alt="Logo" />
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label htmlFor="username">Username</label>
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} // Update 'username' state
+            type="text"
+            placeholder="Username"
+            id="username"
+            name="username"
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Email"
+            id="email"
+            name="email"
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="*******"
+            id="password"
+            name="password"
+          />
+          <button className="btn-form" type="submit">Login</button>
+        </form>
+        <button
+          className="link-button"
+          onClick={() => props.onFormSwitch('register')}
+        >
+          Don't have an account? Register Here!
+        </button>
       </div>
     </div>
   );
