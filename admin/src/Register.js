@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, database } from "./firebase";
+import { auth, firestore } from "./firebase"; // Import 'auth' and 'firestore' from your 'firebase.js' file
+import { collection, addDoc } from 'firebase/firestore';
 
 import MyImage from './pages/logo.png';
 
@@ -13,22 +14,22 @@ export const Register = (props) => {
   const handleRegister = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      
-      // Create a reference to the user's data in the Realtime Database
-      const db = database();
-      const userRef = db.ref('users/' + auth.currentUser.uid);
-      
+  
+      // Create a reference to a Firestore collection where you want to store user data
+      const usersCollection = collection(firestore, 'users');
+  
       // Define the user data to be stored
       const userData = {
         name: name,
         username: username,
         email: email,
+        password: password
         // Add other user data here as needed
       };
-      
-      // Store the user data in the Realtime Database
-      await userRef.set(userData);
-
+  
+      // Add the user data to the Firestore collection
+      await addDoc(usersCollection, userData);
+  
       alert('Account created successfully.');
       // Redirect to the login page or any other desired location
       props.onFormSwitch('login');
@@ -60,8 +61,8 @@ export const Register = (props) => {
           <label htmlFor="username">Username</label>
           <input
             value={username}
-            onChange={(e) => setUsername(e.target.value)} // Update 'username' state
-            type="text" // Use 'text' type for username
+            onChange={(e) => setUsername(e.target.value)} 
+            type="text" 
             placeholder="Username"
             id="username"
             name="username"
