@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, firestore } from "./firebase"; // Import 'auth' and 'firestore' from your 'firebase.js' file
+import { auth, firestore } from "./firebase"; 
 import { collection, addDoc } from 'firebase/firestore';
 
 import MyImage from './pages/logo.png';
@@ -9,7 +9,7 @@ export const Register = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [username, setUsername] = useState(''); // Define 'username' state
+  const [username, setUsername] = useState(''); 
 
   const handleRegister = async () => {
     try {

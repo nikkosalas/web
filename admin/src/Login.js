@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase"; // Import 'auth' from your 'firebase.js' file
+import { auth } from "./firebase"; 
 
 import MyImage from './pages/logo.png';
 
@@ -37,7 +37,7 @@ export const Login = (props) => {
           <label htmlFor="username">Username</label>
           <input
             value={username}
-            onChange={(e) => setUsername(e.target.value)} // Update 'username' state
+            onChange={(e) => setUsername(e.target.value)} 
             type="text"
             placeholder="Username"
             id="username"
