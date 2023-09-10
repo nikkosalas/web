@@ -6,6 +6,6 @@ import { firebaseConfig } from './config';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const firestore = getFirestore(app); // Initialize Firestore
+const firestore = getFirestore(app);  // Initialize Firestore
 
-export { auth, firestore }; // Export auth and firestore
+export { auth, firestore };  // Export auth and firestore

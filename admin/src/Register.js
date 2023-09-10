@@ -13,17 +13,17 @@ export const Register = (props) => {
 
   const handleRegister = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
   
       // Create a reference to a Firestore collection where you want to store user data
       const usersCollection = collection(firestore, 'users');
   
-      // Define the user data to be stored
+      // Define the user data to be stored (excluding the password)
       const userData = {
         name: name,
         username: username,
         email: email,
-        password: password
         // Add other user data here as needed
       };
   

@@ -8,7 +8,7 @@ export const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState(''); // Define 'username' state
+  const [username, setUsername] = useState('');  // Define 'username' state
 
   const handleLogin = async () => {
     try {
