@@ -12,6 +12,7 @@ export default function Driver(){
             <table border="1">
                 <thead>
                     <tr>
+
                         <th>DriverID</th>
                         <th>Firstname</th>
                         <th>Lastname</th>
@@ -23,10 +24,12 @@ export default function Driver(){
                         <th>DriverRating</th>
                         <th>AvailabilityStatus</th>
                         <th>Action</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+
                         <td>1</td>
                         <td>John</td>
                         <td>Doe</td>
@@ -38,8 +41,10 @@ export default function Driver(){
                         <td>4.5</td>
                         <td>Available</td>
                         <td><button>Delete</button></td>
+
                     </tr>
                     <tr>
+
                         <td>2</td>
                         <td>Jane</td>
                         <td>Smith</td>
@@ -51,6 +56,7 @@ export default function Driver(){
                         <td>4.0</td>
                         <td>Unavailable</td>
                         <td><button>Delete</button></td>
+                        
                     </tr>
                 </tbody>
             </table>

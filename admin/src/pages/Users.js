@@ -13,6 +13,7 @@ export default function Users(){
             <table border="1">
                 <thead>
                     <tr>
+
                         <th>UserID</th>
                         <th>Firstname</th>
                         <th>Lastname</th>
@@ -25,10 +26,12 @@ export default function Users(){
                         <th>Disabilities</th>
                         <th>MedicalCondition</th>
                         <th>Action</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+
                         <td>1</td>
                         <td>John</td>
                         <td>Doe</td>
@@ -41,8 +44,10 @@ export default function Users(){
                         <td>No</td>
                         <td>No</td>
                         <td><button>Delete</button></td>
+
                     </tr>
                     <tr>
+
                         <td>2</td>
                         <td>Jane</td>
                         <td>Smith</td>
@@ -55,6 +60,7 @@ export default function Users(){
                         <td>Yes</td>
                         <td>Asthma</td>
                         <td><button>Delete</button></td>
+
                     </tr>
                 </tbody>
             </table>

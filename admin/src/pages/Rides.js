@@ -13,6 +13,7 @@ export default function Rides(){
                 <table border="1">
                         <thead>
                                 <tr>
+
                                 <th>RideID</th>
                                 <th>UserID</th>
                                 <th>DriverID</th>
@@ -21,10 +22,12 @@ export default function Rides(){
                                 <th>RideDate</th>
                                 <th>RideStatus</th>
                                 <th>Action</th>
+                                
                                 </tr>
                         </thead>
                         <tbody>
                                 <tr>
+
                                 <td>1</td>
                                 <td>101</td>
                                 <td>201</td>
@@ -43,6 +46,7 @@ export default function Rides(){
                                 <td>2023-08-12</td>
                                 <td>Cancelled</td>
                                 <td><button>Delete</button></td>
+
                                 </tr>
                         </tbody>
                 </table>
