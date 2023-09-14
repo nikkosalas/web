@@ -2,6 +2,10 @@ import React from 'react';
 import './dashboard.css';
 import './design.css';
 import { useLocation } from 'react-router-dom';
+import { AccountCircle as AccountCircleIcon } from '@mui/icons-material';
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Dashboard = () => {
   const location = useLocation();
@@ -40,21 +44,25 @@ const Dashboard = () => {
     <div className='stats'>
 
       <div className='card'>
+      <AccountCircleIcon fontSize="large" />
         <h2 className='user'>User</h2>
         <p>00</p>
       </div>
 
       <div className='card'>
+      <RateReviewIcon fontSize="large" />
         <h2 className='feedback'>Feedback</h2>
         <p>00</p>
       </div>
 
       <div className='card'>
+      <DirectionsCarFilledIcon fontSize="large" />
         <h2 className='ride'>Ride</h2>
         <p>00</p>
       </div>
 
       <div className='card'>
+      <PersonIcon fontSize="large" />
         <h2 className='driver'>Driver</h2>
         <p>00</p>
       </div>
