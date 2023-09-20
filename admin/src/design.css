@@ -114,12 +114,12 @@ button:hover {
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
   .stats {
-    grid-template-columns: 1fr; /* Change to a single column layout for mobile */
-    text-align: center; /* Center-align the cards */
+    grid-template-columns: 1fr; 
+    text-align: center; 
   }
 
   .card {
-    margin-bottom: 20px; /* Add space between cards */
+    margin-bottom: 20px; 
   }
 
   
