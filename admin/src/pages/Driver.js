@@ -1,67 +1,83 @@
-import Dashboard from "../Dashboard";
+import React, { useEffect, useState } from 'react';
+import Dashboard from '../Dashboard';
+import { firestore } from '../firebase'; // Import your Firebase configuration
 
-import React from 'react';
+export default function Driver() {
+  const [drivers, setDrivers] = useState([]);
 
-export default function Driver(){
-    return(
-        <div>
-        <Dashboard/>
+  useEffect(() => {
+    // Function to fetch driver data from Firestore
+    const fetchDriverData = async () => {
+      try {
+        const driverData = [];
+        const querySnapshot = await firestore.collection('drivers').get();
+        
+        querySnapshot.forEach((doc) => {
+          driverData.push({ id: doc.id, ...doc.data() });
+        });
+        
+        setDrivers(driverData);
+      } catch (error) {
+        console.error('Error fetching driver data:', error);
+      }
+    };
 
-        <h1>Driver</h1>
-        <div class="table-container">
-            <table border="1">
-                <thead>
-                    <tr>
+    // Call the fetchDriverData function to load driver data
+    fetchDriverData();
+  }, []);
 
-                        <th>DriverID</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Birthdate</th>
-                        <th>PhoneNumber</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>ProfilePicture</th>
-                        <th>DriverRating</th>
-                        <th>AvailabilityStatus</th>
-                        <th>Action</th>
+  const deleteDriver = async (id) => {
+    try {
+      await firestore.collection('drivers').doc(id).delete();
+      // Remove the deleted driver from the drivers state
+      setDrivers((prevDrivers) => prevDrivers.filter((driver) => driver.id !== id));
+    } catch (error) {
+      console.error('Error deleting driver:', error);
+    }
+  };
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-
-                        <td>1</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>1990-05-15</td>
-                        <td>123-456-7890</td>
-                        <td>johndoe@example.com</td>
-                        <td>********</td>
-                        <td>profile.jpg</td>
-                        <td>4.5</td>
-                        <td>Available</td>
-                        <td><button>Delete</button></td>
-
-                    </tr>
-                    <tr>
-
-                        <td>2</td>
-                        <td>Jane</td>
-                        <td>Smith</td>
-                        <td>1988-08-25</td>
-                        <td>987-654-3210</td>
-                        <td>janesmith@example.com</td>
-                        <td>********</td>
-                        <td>avatar.jpg</td>
-                        <td>4.0</td>
-                        <td>Unavailable</td>
-                        <td><button>Delete</button></td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        </div>
-    );
-
+  return (
+    <div>
+      <Dashboard />
+      <h1>Driver</h1>
+      <div className="table-container">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>DriverID</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Birthdate</th>
+              <th>PhoneNumber</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>ProfilePicture</th>
+              <th>DriverRating</th>
+              <th>AvailabilityStatus</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {drivers.map((driver) => (
+              <tr key={driver.id}>
+                <td>{driver.driverID}</td>
+                <td>{driver.firstname}</td>
+                <td>{driver.lastname}</td>
+                <td>{driver.birthdate}</td>
+                <td>{driver.phoneNumber}</td>
+                <td>{driver.email}</td>
+                <td>{driver.password}</td>
+                <td>{driver.profilePicture}</td>
+                <td>{driver.driverRating}</td>
+                <td>{driver.availabilityStatus}</td>
+                <td>
+                  <button onClick={() => deleteDriver(driver.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
