@@ -1,70 +1,83 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Dashboard from "../Dashboard";
+import { firestore } from '../firebase'; // Import the Firestore instance
 
+export default function Users() {
+  const [users, setUsers] = useState([]); // State to hold user data
 
+  useEffect(() => {
+    // Function to fetch user data from Firestore
+    const fetchUserData = async () => {
+      try {
+        const userCollection = firestore.collection('users');
+        const userSnapshot = await userCollection.get();
+        const userData = userSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUsers(userData);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
 
-export default function Users(){
-    return(
-        <div>
-        <Dashboard/>
+    fetchUserData(); // Call the function when the component mounts
+  }, []);
 
-        <h1>Users</h1>
-        <div class="table-container">
-            <table border="1">
-                <thead>
-                    <tr>
+  const deleteUser = async (id) => {
+    try {
+      await firestore.collection('users').doc(id).delete();
+      // Remove the deleted user from the state
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
 
-                        <th>UserID</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>BirthDate</th>
-                        <th>Gender</th>
-                        <th>PhoneNumber</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>UserType</th>
-                        <th>Disabilities</th>
-                        <th>MedicalCondition</th>
-                        <th>Action</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-
-                        <td>1</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>1990-05-15</td>
-                        <td>Male</td>
-                        <td>123-456-7890</td>
-                        <td>johndoe@example.com</td>
-                        <td>********</td>
-                        <td>Senior</td>
-                        <td>No</td>
-                        <td>No</td>
-                        <td><button>Delete</button></td>
-
-                    </tr>
-                    <tr>
-
-                        <td>2</td>
-                        <td>Jane</td>
-                        <td>Smith</td>
-                        <td>1988-08-25</td>
-                        <td>Female</td>
-                        <td>987-654-3210</td>
-                        <td>janesmith@example.com</td>
-                        <td>********</td>
-                        <td>PWD</td>
-                        <td>Yes</td>
-                        <td>Asthma</td>
-                        <td><button>Delete</button></td>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        </div>
-    )
+  return (
+    <div>
+      <Dashboard />
+      <h1>Users</h1>
+      <div className="table-container">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>UserID</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>BirthDate</th>
+              <th>Gender</th>
+              <th>PhoneNumber</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>UserType</th>
+              <th>Disabilities</th>
+              <th>MedicalCondition</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.Firstname}</td>
+                <td>{user.Lastname}</td>
+                <td>{user.BirthDate}</td>
+                <td>{user.Gender}</td>
+                <td>{user.PhoneNumber}</td>
+                <td>{user.Email}</td>
+                <td>********</td>
+                <td>{user.UserType}</td>
+                <td>{user.Disabilities}</td>
+                <td>{user.MedicalCondition}</td>
+                <td>
+                  <button onClick={() => deleteUser(user.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }

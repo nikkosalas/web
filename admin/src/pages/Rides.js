@@ -1,56 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Dashboard from "../Dashboard";
+import { firestore } from '../firebase'; // Import the Firestore instance
 
+export default function Rides() {
+  const [rides, setRides] = useState([]); // State to hold ride data
 
+  useEffect(() => {
+    // Function to fetch ride data from Firestore
+    const fetchRideData = async () => {
+      try {
+        const rideCollection = firestore.collection('rides');
+        const rideSnapshot = await rideCollection.get();
+        const rideData = rideSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setRides(rideData);
+      } catch (error) {
+        console.error('Error fetching ride data:', error);
+      }
+    };
 
-export default function Rides(){
-    return(
-        <div>
-        <Dashboard/>
+    fetchRideData(); // Call the function when the component mounts
+  }, []);
 
-        <h1>Rides</h1>
-        <div class="table-container">
-                <table border="1">
-                        <thead>
-                                <tr>
+  const deleteRide = async (id) => {
+    try {
+      await firestore.collection('rides').doc(id).delete();
+      // Remove the deleted ride from the state
+      setRides((prevRides) => prevRides.filter((ride) => ride.id !== id));
+    } catch (error) {
+      console.error('Error deleting ride:', error);
+    }
+  };
 
-                                <th>RideID</th>
-                                <th>UserID</th>
-                                <th>DriverID</th>
-                                <th>PickUpLocation</th>
-                                <th>DropOffLocation</th>
-                                <th>RideDate</th>
-                                <th>RideStatus</th>
-                                <th>Action</th>
-                                
-                                </tr>
-                        </thead>
-                        <tbody>
-                                <tr>
-
-                                <td>1</td>
-                                <td>101</td>
-                                <td>201</td>
-                                <td>123 Main St</td>
-                                <td>456 Elm St</td>
-                                <td>2023-08-10</td>
-                                <td>Completed</td>
-                                <td><button>Delete</button></td>
-                                </tr>
-                                <tr>
-                                <td>2</td>
-                                <td>102</td>
-                                <td>202</td>
-                                <td>789 Oak Ave</td>
-                                <td>567 Maple St</td>
-                                <td>2023-08-12</td>
-                                <td>Cancelled</td>
-                                <td><button>Delete</button></td>
-
-                                </tr>
-                        </tbody>
-                </table>
-        </div>
-        </div>
-    )
+  return (
+    <div>
+      <Dashboard />
+      <h1>Rides</h1>
+      <div className="table-container">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>RideID</th>
+              <th>UserID</th>
+              <th>DriverID</th>
+              <th>PickUpLocation</th>
+              <th>DropOffLocation</th>
+              <th>RideDate</th>
+              <th>RideStatus</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rides.map((ride) => (
+              <tr key={ride.id}>
+                <td>{ride.id}</td>
+                <td>{ride.UserID}</td>
+                <td>{ride.DriverID}</td>
+                <td>{ride.PickUpLocation}</td>
+                <td>{ride.DropOffLocation}</td>
+                <td>{ride.RideDate}</td>
+                <td>{ride.RideStatus}</td>
+                <td>
+                  <button onClick={() => deleteRide(ride.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
+
+
+
+
+
+
