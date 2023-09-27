@@ -7,4 +7,5 @@ export const firebaseConfig = {
   storageBucket: "carecabs-26bfa.appspot.com",
   messagingSenderId: "205073319244",
   appId: "1:205073319244:web:8cf249e14a7e9e269bfbe9"
+  
   };
