@@ -63,10 +63,12 @@ p {
 .table-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 30vh; 
+  align-items: center; 
   overflow-x: auto; 
-  padding: 10px; 
+  padding: 20px; 
+  flex-direction: column;
+  
+  
 }
 
 /* Style for the table */
@@ -77,6 +79,8 @@ table {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  
 }
 
 /* Style for table headers (th) */
@@ -84,17 +88,18 @@ th {
   background-color: #333;
   color: #fff;
   font-weight: bold;
-  font-size: 14px;
-  padding: 8px;
-  text-align: center; 
+  font-size: 11px; /* Adjust the font size as needed */
+  padding: 11px;
+  text-align: center;
   border: 1px solid #444;
 }
 
 /* Style for table cells (td) */
 td {
   border: 1px solid #ddd;
-  text-align: center; 
-  padding: 8px;
+  text-align: center;
+  font-size: 13px; /* Adjust the font size as needed */
+  padding: 5px;
 }
 
 /* Style for delete buttons */

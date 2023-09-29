@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from "../Dashboard";
-import { firestore } from '../firebase'; // Import the Firestore instance
+import { firestore } from '../firebase'; 
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 
 export default function Users() {
   const [users, setUsers] = useState([]); // State to hold user data
@@ -9,12 +10,14 @@ export default function Users() {
     // Function to fetch user data from Firestore
     const fetchUserData = async () => {
       try {
-        const userCollection = firestore.collection('users');
-        const userSnapshot = await userCollection.get();
-        const userData = userSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const userCollection = collection(firestore, 'users');
+        const userSnapshot = await getDocs(userCollection);
+        const userData = userSnapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((user) => user.isRegisterComplete === true); // Filter condition
         setUsers(userData);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -26,7 +29,8 @@ export default function Users() {
 
   const deleteUser = async (id) => {
     try {
-      await firestore.collection('users').doc(id).delete();
+      const userDoc = doc(firestore, 'users', id); // Reference to the document
+      await deleteDoc(userDoc); // Delete the document
       // Remove the deleted user from the state
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
     } catch (error) {
@@ -42,34 +46,61 @@ export default function Users() {
         <table border="1">
           <thead>
             <tr>
-              <th>UserID</th>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>BirthDate</th>
-              <th>Gender</th>
-              <th>PhoneNumber</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>UserType</th>
-              <th>Disabilities</th>
-              <th>MedicalCondition</th>
+              <th>accountCreationDate</th>
+              <th>age</th>
+              <th>birthdate</th>
+              <th>email</th>
+              <th>firstname</th>
+              <th>fontSize</th>
+              <th>isAvailable</th>
+              <th>isRegisterComplete</th>
+              <th>isVerified</th>
+              <th>lastname</th>
+              <th>medicalCondition</th>
+              <th>phoneNumber</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.accountCreationDate}</td>
+                <td>{user.age}</td>
+                <td>{user.birthdate}</td>
+                <td>{user.email}</td>
+                <td>{user.firstname}</td>
+                <td>{user.fontSize}</td>
+                <td>{user.isAvailable}</td>
+                <td>{user.isRegisterComplete}</td>
+                <td>{user.isVerified}</td>
+                <td>{user.lastname}</td>
+                <td>{user.medicalCondition}</td>
+                <td>{user.phoneNumber}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <table border="1">
+          <thead>
+            <tr>
+              <th>profilePicture</th>
+              <th>registerType</th>
+              <th>sex</th>
+              <th>totalTrips</th>
+              <th>userID</th>
+              <th>userType</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.Firstname}</td>
-                <td>{user.Lastname}</td>
-                <td>{user.BirthDate}</td>
-                <td>{user.Gender}</td>
-                <td>{user.PhoneNumber}</td>
-                <td>{user.Email}</td>
-                <td>********</td>
-                <td>{user.UserType}</td>
-                <td>{user.Disabilities}</td>
-                <td>{user.MedicalCondition}</td>
+                <td>{user.profilePicture}</td>
+                <td>{user.registerType}</td>
+                <td>{user.sex}</td>
+                <td>{user.totalTrips}</td>
+                <td>{user.userID}</td>
+                <td>{user.userType}</td>
                 <td>
                   <button onClick={() => deleteUser(user.id)}>Delete</button>
                 </td>
