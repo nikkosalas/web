@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './dashboard.css';
 import './design.css';
 import { useLocation } from 'react-router-dom';
@@ -10,7 +10,8 @@ import PersonIcon from '@mui/icons-material/Person';
 const Dashboard = () => {
   const location = useLocation();
 
-  
+  const [userCount, setUserCount] = useState(0); // State to keep track of user count
+
   const isDashboardPath = location.pathname === '/dashboard';
   
   return (
@@ -41,11 +42,12 @@ const Dashboard = () => {
     
     <div className='stats'>
 
-      <div className='card'>
-      <AccountCircleIcon fontSize="large" />
-        <h2 className='user'>User</h2>
-        <p>00</p>
-      </div>
+<div className='card'>
+  <AccountCircleIcon fontSize="large" />
+  <h2 className='user'>User</h2>
+  <p>{userCount}</p>
+</div>
+
 
       <div className='card'>
       <RateReviewIcon fontSize="large" />
