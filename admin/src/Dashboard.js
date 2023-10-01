@@ -27,9 +27,7 @@ const Dashboard = () => {
           <li>
           <a href='/rides'>Rides</a>
           </li>
-          <li>
-          <a href='/driver'>Driver</a>
-        </li>
+         
         <li>
           <a href='/'>Logout</a>
         </li>
