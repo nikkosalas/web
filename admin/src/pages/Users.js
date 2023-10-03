@@ -5,6 +5,7 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 
 export default function Users() {
   const [users, setUsers] = useState([]); // State to hold user data
+  const [userCount, setUserCount] = useState(0); // State to hold user count
 
   useEffect(() => {
     // Function to fetch user data from Firestore
@@ -19,6 +20,9 @@ export default function Users() {
           }))
           .filter((user) => user.isRegisterComplete === true); // Filter condition
         setUsers(userData);
+
+        // Update the user count
+        setUserCount(userData.length);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -33,6 +37,9 @@ export default function Users() {
       await deleteDoc(userDoc); // Delete the document
       // Remove the deleted user from the state
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+
+      // Update the user count after deletion
+      setUserCount((prevCount) => prevCount - 1);
     } catch (error) {
       console.error('Error deleting user:', error);
     }
@@ -40,7 +47,7 @@ export default function Users() {
 
   return (
     <div>
-      <Dashboard />
+      <Dashboard userCount={userCount} />
       <h1>Users</h1>
       <div className="table-container">
         <table border="1">
