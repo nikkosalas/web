@@ -1,69 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from "../Dashboard";
 import { firestore } from '../firebase'; // Import the Firestore instance
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; // Import Firestore functions
 
-export default function Rides() {
-  const [rides, setRides] = useState([]); // State to hold ride data
+export default function Trips() {
+  const [trips, setTrips] = useState([]); // State to hold trip data
 
   useEffect(() => {
-    // Function to fetch ride data from Firestore
-    const fetchRideData = async () => {
+    // Function to fetch trip data from Firestore
+    const fetchTripData = async () => {
       try {
-        const rideCollection = firestore.collection('rides');
-        const rideSnapshot = await rideCollection.get();
-        const rideData = rideSnapshot.docs.map((doc) => ({
+        const tripCollection = collection(firestore, 'trips');
+        const tripSnapshot = await getDocs(tripCollection);
+        const tripData = tripSnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setRides(rideData);
+        setTrips(tripData);
       } catch (error) {
-        console.error('Error fetching ride data:', error);
+        console.error('Error fetching trip data:', error);
       }
     };
 
-    fetchRideData(); // Call the function when the component mounts
+    fetchTripData(); // Call the function when the component mounts
   }, []);
 
-  const deleteRide = async (id) => {
+  const deleteTrip = async (id) => {
     try {
-      await firestore.collection('rides').doc(id).delete();
-      // Remove the deleted ride from the state
-      setRides((prevRides) => prevRides.filter((ride) => ride.id !== id));
+      const tripDoc = doc(firestore, 'trips', id); // Reference to the document
+      await deleteDoc(tripDoc); // Delete the document
+      // Remove the deleted trip from the state
+      setTrips((prevTrips) => prevTrips.filter((trip) => trip.id !== id));
     } catch (error) {
-      console.error('Error deleting ride:', error);
+      console.error('Error deleting trip:', error);
     }
   };
 
   return (
     <div>
       <Dashboard />
-      <h1>Rides</h1>
+      <h1>Trips</h1>
       <div className="table-container">
         <table border="1">
           <thead>
             <tr>
-              <th>RideID</th>
-              <th>UserID</th>
-              <th>DriverID</th>
-              <th>PickUpLocation</th>
-              <th>DropOffLocation</th>
-              <th>RideDate</th>
-              <th>RideStatus</th>
+              <th>BookingID</th>
+              <th>Complete</th>
+              <th>DestinationLatitude</th>
+              <th>DestinationLongitude</th>
+              <th>DriverUserID</th>
+              <th>PassengerUserID</th>
+              <th>PickupLatitude</th>
+              <th>PickupLongitude</th>
+              <th>TripDate</th>
+              <th>TripID</th>
+              <th>TripStatus</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {rides.map((ride) => (
-              <tr key={ride.id}>
-                <td>{ride.id}</td>
-                <td>{ride.UserID}</td>
-                <td>{ride.DriverID}</td>
-                <td>{ride.PickUpLocation}</td>
-                <td>{ride.DropOffLocation}</td>
-                <td>{ride.RideDate}</td>
-                <td>{ride.RideStatus}</td>
+            {trips.map((trip) => (
+              <tr key={trip.id}>
+                <td>{trip.bookingID}</td>
+                <td>{trip.complete}</td>
+                <td>{trip.destinationLatitude}</td>
+                <td>{trip.destinationLongitude}</td>
+                <td>{trip.driverUserID}</td>
+                <td>{trip.passengerUserID}</td>
+                <td>{trip.pickupLatitude}</td>
+                <td>{trip.pickupLongitude}</td>
+                <td>{trip.tripDate}</td>
+                <td>{trip.tripID}</td>
+                <td>{trip.tripStatus}</td>
                 <td>
-                  <button onClick={() => deleteRide(ride.id)}>Delete</button>
+                  <button onClick={() => deleteTrip(trip.id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -73,9 +83,3 @@ export default function Rides() {
     </div>
   );
 }
-
-
-
-
-
-

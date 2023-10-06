@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dashboard from '../Dashboard';
 import { firestore } from '../firebase'; // Import your Firebase configuration
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; // Import Firestore functions
 
 export default function Feedback() {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -9,13 +10,12 @@ export default function Feedback() {
     // Function to fetch feedback data from Firestore
     const fetchFeedbackData = async () => {
       try {
-        const feedbackData = [];
-        const querySnapshot = await firestore.collection('feedback').get();
-
-        querySnapshot.forEach((doc) => {
-          feedbackData.push({ id: doc.id, ...doc.data() });
-        });
-
+        const feedbackCollection = collection(firestore, 'feedbacks');
+        const feedbackSnapshot = await getDocs(feedbackCollection);
+        const feedbackData = feedbackSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
         setFeedbacks(feedbackData);
       } catch (error) {
         console.error('Error fetching feedback data:', error);
@@ -28,7 +28,8 @@ export default function Feedback() {
 
   const deleteFeedback = async (id) => {
     try {
-      await firestore.collection('feedback').doc(id).delete();
+      const feedbackDoc = doc(firestore, 'feedbacks', id);
+      await deleteDoc(feedbackDoc);
       // Remove the deleted feedback from the feedbacks state
       setFeedbacks((prevFeedbacks) => prevFeedbacks.filter((feedback) => feedback.id !== id));
     } catch (error) {
@@ -44,24 +45,20 @@ export default function Feedback() {
         <table border="1">
           <thead>
             <tr>
+              <th>Comment</th>
+              <th>FeedbackDate</th>
               <th>FeedbackID</th>
               <th>UserID</th>
-              <th>DriverID</th>
-              <th>Rating</th>
-              <th>Comment</th>
-              <th>FeedBackDate</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {feedbacks.map((feedback) => (
               <tr key={feedback.id}>
-                <td>{feedback.feedbackID}</td>
-                <td>{feedback.userID}</td>
-                <td>{feedback.driverID}</td>
-                <td>{feedback.rating}</td>
                 <td>{feedback.comment}</td>
                 <td>{feedback.feedbackDate}</td>
+                <td>{feedback.feedbackID}</td>
+                <td>{feedback.userID}</td>
                 <td>
                   <button onClick={() => deleteFeedback(feedback.id)}>Delete</button>
                 </td>
