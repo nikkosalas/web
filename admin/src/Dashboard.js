@@ -7,13 +7,14 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
 import PersonIcon from '@mui/icons-material/Person';
 
-
-const Dashboard = ({ userCount }) => { // Receive userCount as a prop
+const Dashboard = ({ userCount, feedbackCount, tripCount }) => { 
   const location = useLocation();
   const isDashboardPath = location.pathname === '/dashboard';
   
-  console.log('userCount in Dashboard:', userCount);
- 
+  console.log('Received userCount:', userCount);
+  console.log('Received feedbackCount:', feedbackCount);
+  console.log('Received tripCount:', tripCount);
+  
   return (
     <div>
       <nav className='nav'>
@@ -46,13 +47,13 @@ const Dashboard = ({ userCount }) => { // Receive userCount as a prop
       <div className='card'>
       <RateReviewIcon fontSize="large" />
         <h2 className='feedback'>Feedback</h2>
-        <p>00</p>
+        <p>{feedbackCount}</p>
       </div>
 
       <div className='card'>
       <DirectionsCarFilledIcon fontSize="large" />
-        <h2 className='ride'>Ride</h2>
-        <p>00</p>
+        <h2 className='ride'>Trips</h2>
+        <p>{tripCount}</p> {/* Display the tripCount */}
       </div>
 
       <div className='card'>

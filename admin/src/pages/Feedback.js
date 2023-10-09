@@ -5,6 +5,7 @@ import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; // Imp
 
 export default function Feedback() {
   const [feedbacks, setFeedbacks] = useState([]);
+  const [feedbackCount, setFeedbackCount] = useState(0); // State to hold feedback count
 
   useEffect(() => {
     // Function to fetch feedback data from Firestore
@@ -17,6 +18,8 @@ export default function Feedback() {
           ...doc.data(),
         }));
         setFeedbacks(feedbackData);
+        // Update feedback count
+        setFeedbackCount(feedbackData.length);
       } catch (error) {
         console.error('Error fetching feedback data:', error);
       }
@@ -32,6 +35,8 @@ export default function Feedback() {
       await deleteDoc(feedbackDoc);
       // Remove the deleted feedback from the feedbacks state
       setFeedbacks((prevFeedbacks) => prevFeedbacks.filter((feedback) => feedback.id !== id));
+      // Update feedback count after deletion
+      setFeedbackCount((prevCount) => prevCount - 1);
     } catch (error) {
       console.error('Error deleting feedback:', error);
     }
@@ -39,7 +44,7 @@ export default function Feedback() {
 
   return (
     <div>
-      <Dashboard />
+      <Dashboard feedbackCount={feedbackCount} />
       <h1>Feedback</h1>
       <div className="table-container">
         <table border="1">

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from "../Dashboard";
-import { firestore } from '../firebase'; // Import the Firestore instance
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore'; // Import Firestore functions
+import { firestore } from '../firebase'; 
+import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
 
 export default function Trips() {
   const [trips, setTrips] = useState([]); // State to hold trip data
+  const [tripCount, setTripCount] = useState(0); // State to hold trip count
 
   useEffect(() => {
     // Function to fetch trip data from Firestore
@@ -17,6 +18,9 @@ export default function Trips() {
           ...doc.data(),
         }));
         setTrips(tripData);
+
+        // Update the trip count
+        setTripCount(tripData.length);
       } catch (error) {
         console.error('Error fetching trip data:', error);
       }
@@ -31,6 +35,9 @@ export default function Trips() {
       await deleteDoc(tripDoc); // Delete the document
       // Remove the deleted trip from the state
       setTrips((prevTrips) => prevTrips.filter((trip) => trip.id !== id));
+
+      // Update the trip count after deletion
+      setTripCount((prevCount) => prevCount - 1);
     } catch (error) {
       console.error('Error deleting trip:', error);
     }
@@ -38,7 +45,7 @@ export default function Trips() {
 
   return (
     <div>
-      <Dashboard />
+      <Dashboard tripCount={tripCount} /> {/* Pass tripCount as a prop */}
       <h1>Trips</h1>
       <div className="table-container">
         <table border="1">
