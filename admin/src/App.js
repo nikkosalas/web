@@ -14,6 +14,9 @@ import Rides from "./pages/Rides";
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
   const [key, setKey] = useState(""); // Key for CSSTransition
+  const [userCount, setUserCount] = useState(0);
+  const [feedbackCount, setFeedbackCount] = useState(0);
+  const [tripCount, setTripCount] = useState(0);
   
   const toggleForm = (formName) => {
     setCurrentForm(formName);
@@ -28,7 +31,7 @@ function App() {
             <Route
               exact path="/" element={ currentForm === "login" ? ( <Login onFormSwitch={toggleForm} /> ) : (<Register onFormSwitch={toggleForm} /> ) }
             />
-            <Route exact path="/dashboard" element={<Dashboard  />} />
+            <Route exact path="/dashboard" element={<Dashboard userCount={userCount} feedbackCount={feedbackCount} tripCount={tripCount} />} />
             <Route exact path="/feedback" element={<Feedback />} />
             <Route exact path="/users" element={<Users />} />
             <Route exact path="/driver" element={<Driver />} />

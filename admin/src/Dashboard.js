@@ -56,11 +56,7 @@ const Dashboard = ({ userCount, feedbackCount, tripCount }) => {
         <p>{tripCount}</p> {/* Display the tripCount */}
       </div>
 
-      <div className='card'>
-      <PersonIcon fontSize="large" />
-        <h2 className='driver'>Driver</h2>
-        <p>00</p>
-      </div>
+      
      
     </div>
     
