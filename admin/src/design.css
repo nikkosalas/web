@@ -12,7 +12,7 @@ h1 {
 }
 
 .stats {
-  margin-top: 60px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column; /* Arrange cards in a column */
   align-items: center;
@@ -26,7 +26,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
   width: 70%;
   border: 1px solid black;
   border-radius: 5px;
@@ -43,10 +43,10 @@ h1 {
 }
 
 .user,
-.driver,
+.booking,
 .feedback,
 .ride {
-  color: black;
+  color: rgb(8, 1, 1);
   font-size: 24px; 
   padding: 0px;
   font-weight: 500;

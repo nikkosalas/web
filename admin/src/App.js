@@ -8,8 +8,8 @@ import { Register } from "./Register";
 import Dashboard from "./Dashboard";
 import Feedback from "./pages/Feedback";
 import Users from "./pages/Users";
-import Driver from "./pages/Driver";
-import Rides from "./pages/Rides";
+import Booking from "./pages/Booking";
+import Trip from "./pages/Trip";
 
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
@@ -32,8 +32,8 @@ function App() {
             <Route exact path="/dashboard" element={<Dashboard  />} />
             <Route exact path="/feedback" element={<Feedback />} />
             <Route exact path="/users" element={<Users />} />
-            <Route exact path="/driver" element={<Driver />} />
-            <Route exact path="/rides" element={<Rides />} />
+            <Route exact path="/booking" element={<Booking />} />
+            <Route exact path="/trip" element={<Trip />} />
             {/* Other routes */}
           </Routes>
         </CSSTransition>

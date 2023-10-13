@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { AccountCircle as AccountCircleIcon } from '@mui/icons-material';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import DirectionsCarFilledIcon from '@mui/icons-material/DirectionsCarFilled';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { collection, query, onSnapshot } from 'firebase/firestore';
 import { firestore } from './firebase'; // Import your Firebase configuration
 
@@ -55,7 +56,10 @@ const Dashboard = () => {
             <a href='/feedback'>Feedback</a>
           </li>
           <li>
-            <a href='/rides'>Rides</a>
+            <a href='/trip'>Trips</a>
+          </li>
+          <li>
+            <a href='/booking'>Booking</a>
           </li>
           <li>
             <a href='/'>Logout</a>
@@ -80,6 +84,12 @@ const Dashboard = () => {
           <div className='card'>
             <DirectionsCarFilledIcon fontSize='large' />
             <h2 className='ride'>Trips</h2>
+            <p>{tripCount}</p>
+          </div>
+
+          <div className='card'>
+            <BookmarksIcon fontSize='large' />
+            <h2 className='booking'>Booking</h2>
             <p>{tripCount}</p>
           </div>
         </div>

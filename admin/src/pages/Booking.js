@@ -39,7 +39,7 @@ export default function Driver() {
   return (
     <div>
       <Dashboard />
-      <h1>Driver</h1>
+      <h1>Booking</h1>
       <div className="table-container">
         <table border="1">
           <thead>
