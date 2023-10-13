@@ -1,39 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import Dashboard from '../Dashboard';
-import { firestore } from '../firebase'; // Import your Firebase configuration
+import { getDatabase, ref, onValue, remove } from 'firebase/database';
 
-export default function Driver() {
-  const [drivers, setDrivers] = useState([]);
+import { database } from '../firebase'; // Import your Firebase configuration
+
+export default function Booking() {
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    // Function to fetch driver data from Firestore
-    const fetchDriverData = async () => {
-      try {
-        const driverData = [];
-        const querySnapshot = await firestore.collection('drivers').get();
-        
-        querySnapshot.forEach((doc) => {
-          driverData.push({ id: doc.id, ...doc.data() });
-        });
-        
-        setDrivers(driverData);
-      } catch (error) {
-        console.error('Error fetching driver data:', error);
-      }
+    // Function to fetch booking data from the Realtime Database
+    const fetchBookingData = () => {
+      const database = getDatabase();
+      const bookingsRef = ref(database, 'bookings'); // Reference to the 'bookings' node in the Realtime Database
+
+      onValue(bookingsRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const bookingData = Object.values(snapshot.val());
+          setBookings(bookingData);
+        }
+      });
     };
 
-    // Call the fetchDriverData function to load driver data
-    fetchDriverData();
+    // Call the fetchBookingData function to load booking data
+    fetchBookingData();
   }, []);
 
-  const deleteDriver = async (id) => {
-    try {
-      await firestore.collection('drivers').doc(id).delete();
-      // Remove the deleted driver from the drivers state
-      setDrivers((prevDrivers) => prevDrivers.filter((driver) => driver.id !== id));
-    } catch (error) {
-      console.error('Error deleting driver:', error);
-    }
+  const deleteBooking = (id) => {
+    const database = getDatabase();
+    const bookingRef = ref(database, 'bookings/' + id);
+
+    remove(bookingRef)
+      .then(() => {
+        // The booking is deleted successfully
+        // You can also update the local state to remove the deleted booking
+        setBookings((prevBookings) => prevBookings.filter((booking) => booking.bookingID !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting booking:', error);
+      });
   };
 
   return (
@@ -44,34 +48,26 @@ export default function Driver() {
         <table border="1">
           <thead>
             <tr>
-              <th>DriverID</th>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Birthdate</th>
-              <th>PhoneNumber</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>ProfilePicture</th>
-              <th>DriverRating</th>
-              <th>AvailabilityStatus</th>
+              <th>bookingDate</th>
+              <th>bookingID</th>
+              <th>bookingStatus</th>
+              <th>passengerName</th>
+              <th>passengerType</th>
+              <th>vehicleColor</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {drivers.map((driver) => (
-              <tr key={driver.id}>
-                <td>{driver.driverID}</td>
-                <td>{driver.firstname}</td>
-                <td>{driver.lastname}</td>
-                <td>{driver.birthdate}</td>
-                <td>{driver.phoneNumber}</td>
-                <td>{driver.email}</td>
-                <td>{driver.password}</td>
-                <td>{driver.profilePicture}</td>
-                <td>{driver.driverRating}</td>
-                <td>{driver.availabilityStatus}</td>
+            {bookings.map((booking) => (
+              <tr key={booking.bookingID}>
+                <td>{booking.bookingDate}</td>
+                <td>{booking.bookingID}</td>
+                <td>{booking.bookingStatus}</td>
+                <td>{booking.passengerName}</td>
+                <td>{booking.passengerType}</td>
+                <td>{booking.vehicleColor}</td>
                 <td>
-                  <button onClick={() => deleteDriver(driver.id)}>Delete</button>
+                  <button onClick={() => deleteBooking(booking.bookingID)}>Delete</button>
                 </td>
               </tr>
             ))}

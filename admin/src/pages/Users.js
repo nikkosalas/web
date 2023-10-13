@@ -18,7 +18,7 @@ export default function Users() {
             id: doc.id,
             ...doc.data(),
           }))
-          .filter((user) => user.isRegisterComplete === true); // Filter condition
+          .filter((user) => user.isRegisterComplete === true && !user.isAdmin); // Filter condition
         setUsers(userData);
 
         // Update the user count

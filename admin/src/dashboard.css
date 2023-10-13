@@ -21,6 +21,7 @@
   
   .site-title {
     font-size: 2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
   }
   
   .nav ul {
@@ -37,6 +38,7 @@
     color: inherit;
     padding: 0.5rem; 
     transition: background-color 0.3s ease; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
   }
   
   .nav a:hover {
