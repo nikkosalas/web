@@ -12,12 +12,12 @@ h1 {
 }
 
 .stats {
-  margin-top: 20px;
+  margin-top: 17px;
   display: flex;
   flex-direction: column; /* Arrange cards in a column */
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -58,6 +58,7 @@ p {
   font-size: 25px; 
   margin-top: 10px;
   padding: 5px;
+  font-weight: 900;
 }
 
 /* Style for the table container */

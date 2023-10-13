@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase"; 
 
-import MyImage from './pages/logo.png';
+import MyImage from './pages/logo2.png';
 
 export const Login = (props) => {
   const [email, setEmail] = useState('');

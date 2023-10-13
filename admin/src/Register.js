@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, firestore } from "./firebase"; 
 import { collection, addDoc } from 'firebase/firestore';
 
-import MyImage from './pages/logo.png';
+import MyImage from './pages/logo2.png';
 
 export const Register = (props) => {
   const [email, setEmail] = useState('');

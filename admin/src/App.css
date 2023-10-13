@@ -91,7 +91,7 @@ button.btn-form:hover {
 }
 
 .box {
-  padding: 4rem;
+  padding: 2rem 4rem 5rem 4rem;
   background-color: rgba(5, 3, 3, 0.288);
   border-radius: 5px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); 
