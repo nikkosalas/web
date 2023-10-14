@@ -34,16 +34,23 @@
   }
   
   .nav a {
+    display: flex;
+    align-items: center; /* Vertically align content */
     text-decoration: none;
     color: inherit;
-    padding: 0.5rem; 
-    transition: background-color 0.3s ease; 
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    padding: 0.5rem;
+    transition: background-color 0.3s ease;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  /* Add padding to create space between icon and text */
+  .nav a > svg {
+    margin-right: 0.25rem; /* Adjust as needed */
   }
   
   .nav a:hover {
-    background-color: #777; 
-    border-radius: 5px; 
+    background-color: #777;
+    border-radius: 5px;
   }
   
   /* Media Query for Mobile Devices */

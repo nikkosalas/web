@@ -9,6 +9,7 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import { query, collection, onSnapshot } from 'firebase/firestore';
 import { firestore } from './firebase';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const Dashboard = () => {
   const location = useLocation();
@@ -63,28 +64,38 @@ const Dashboard = () => {
 
   return (
     <div>
-      <nav className="nav">
-        <a href="/dashboard" className="site-title">
-          Admin
-        </a>
-        <ul>
-          <li>
-            <a href="/users">Users</a>
-          </li>
-          <li>
-            <a href="/feedback">Feedback</a>
-          </li>
-          <li>
-            <a href="/trip">Trips</a>
-          </li>
-          <li>
-            <a href="/booking">Booking</a>
-          </li>
-          <li>
-            <a href="/">Logout</a>
-          </li>
-        </ul>
-      </nav>
+        <nav className="nav">
+          <a href="/dashboard" className="site-title">
+            Admin
+          </a>
+          <ul>
+            <li>
+              <a href="/users">
+                <AccountCircleIcon fontSize="small" /> Users
+              </a>
+            </li>
+            <li>
+              <a href="/feedback">
+                <RateReviewIcon fontSize="small" /> Feedback
+              </a>
+            </li>
+            <li>
+              <a href="/trip">
+                <DirectionsCarFilledIcon fontSize="small" /> Trips
+              </a>
+            </li>
+            <li>
+              <a href="/booking">
+                <BookmarksIcon fontSize="small" /> Booking
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <ExitToAppIcon fontSize="small" /> Logout
+              </a>
+            </li>
+          </ul>
+        </nav>
 
       {isDashboardPath && (
         <div className="stats">
